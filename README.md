@@ -1,6 +1,7 @@
 # ADPY-14-project_7_stack_class
 
-The project creates Stack class, inputs test data, gives answer: 'Balanced' or 'NOT balanced'
+ Stack is an abstract class that realises a list of elements organized by LIFO. It works with balanced/unbalanced parentheses.
+    Balanced parentheses mean that each opening character has a matching closing character and that the parenthesis pairs are correctly nested.
 
 ## Description
 
