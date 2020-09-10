@@ -4,7 +4,7 @@ from test_data import TEST_1, TEST_2, TEST_3, TEST_4, TEST_5, TEST_6
 NL = '\n'
 
 #string = 'TesT_string'
-stack = Stack(TEST_1)
+stack_111 = Stack(TEST_2)
 #print('isEmpty: ', stack.isEmpty())
 # print('push: ', stack.push())
 # print('peek: ', stack.peek())
@@ -17,5 +17,4 @@ stack = Stack(TEST_1)
 # print('size: ', stack.size(), NL)
 # print('pop: ', stack.pop())
 # print('size: ', stack.size(), NL)
-stack.isBalanced()
-print(stack)
+stack_111.isBalanced()

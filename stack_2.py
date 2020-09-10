@@ -1,6 +1,6 @@
 from test_data import TEST_1, TEST_2, TEST_3, TEST_4, TEST_5, TEST_6
 
-CLOSER = {'(': ')', '[': ']', '{': '}'}
+CLOSER = {'(': ')', ')': '(', '[': ']', ']': '[', '{': '}', '}': '{'}
 
 #print(PAIRS['{'])
 
@@ -15,7 +15,7 @@ class Stack():
         self.string = string
         self.string_splitted = list(self.string)
         self.pop_counter = 0 # коэф удаление пар скобок
-        print('string_splitted: ', len(self.string_splitted), self.string_splitted)
+        #print('string_splitted: ', len(self.string_splitted), self.string_splitted)
         if len(self.stack) % 2 != 0:
             print('Переданные данные НЕ сбалансированы! Дальнейшая проверка проверка прекращается.')
         else:
@@ -44,24 +44,32 @@ class Stack():
         return self.stack[len(self.stack) - 1]
 
     def size(self):
-        """ The function returning the quntity of elements (stack size) """
+        """ The function returning the quantity of elements (stack size) """
         return len(self.stack)
 
     def isBalanced(self):
         """ The function is matching closing character and that the parenthesis pairs are correctly nested. Works with: (), [], {} only """
-        # print(self.string)
-        # print(self.string[6])
-
         if self.isEmpty():
             self.push(self.string[0])
         else:
-            for element in range(1, len(self.string)):
-                if CLOSER[self.peek()] == element:
+            pass
+        for index in range(1, len(self.string)):
+            #print('***', self.peek())
+            #print('+++', CLOSER[self.peek()])
+            #print('---', len(self.string), self.string[index])
+            if CLOSER[self.peek()] == self.string[index]:
+                try:
                     self.pop()
-                    element = '-'
-                else:
-                    self.push(element)
+                except:
+                    IndexError
+            else:
+                self.push(self.string[index])
 
+        if self.isEmpty():
+            print(f'Cтрока {self.string} сбалансирована')
+        else:
+            print(f'Cтрока {self.string} не сбалансирована')
+        print('Состав стэка: ', self.stack)
 
 
 
