@@ -54,9 +54,6 @@ class Stack():
         else:
             pass
         for index in range(1, len(self.string)):
-            #print('***', self.peek())
-            #print('+++', CLOSER[self.peek()])
-            #print('---', len(self.string), self.string[index])
             if CLOSER[self.peek()] == self.string[index]:
                 try:
                     self.pop()
