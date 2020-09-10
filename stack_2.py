@@ -29,9 +29,9 @@ class Stack():
             isEmpty = False
         return isEmpty
 
-    def push(self):
+    def push(self, element):
         """ The function for adding element to stack """
-        self.stack.append()
+        self.stack.append(element)
 
     def pop(self):
         """ The function for deleting last element, returning previous element """
@@ -49,17 +49,33 @@ class Stack():
 
     def isBalanced(self):
         """ The function is matching closing character and that the parenthesis pairs are correctly nested. Works with: (), [], {} only """
-        for index, element in enumerate(self.string_splitted):
-            print('***', self.size())
-            if index == 0:
-                self.stack.append(element)
-            else:
-                if element != CLOSER[self.stack[index - 1 - self.pop_counter]]:
-                    self.stack.append(element)
-                else:
-                    self.stack.pop()
+        # print(self.string)
+        # print(self.string[6])
 
-        print('Стэк: ', self.stack)
+        if self.isEmpty():
+            self.push(self.string[0])
+        else:
+            for element in range(1, len(self.string)):
+                if CLOSER[self.peek()] == element:
+                    self.pop()
+                    element = '-'
+                else:
+                    self.push(element)
+
+
+
+
+        # for index, element in enumerate(self.string_splitted):
+        #     print('***', self.size())
+        #     if index == 0:
+        #         self.stack.append(element)
+        #     else:
+        #         if element != CLOSER[self.stack[index - 1 - self.pop_counter]]:
+        #             self.stack.append(element)
+        #         else:
+        #             self.stack.pop()
+        #
+        # print('Стэк: ', self.stack)
 
 
 
