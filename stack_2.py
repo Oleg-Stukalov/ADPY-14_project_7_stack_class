@@ -1,6 +1,6 @@
 from test_data import TEST_1, TEST_2, TEST_3, TEST_4, TEST_5, TEST_6
 
-CLOSER = {'(': ')', ')': '(', '[': ']', ']': '[', '{': '}', '}': '{'}
+CLOSER = {'(': ')', '[': ']', '{': '}'}
 
 #print(PAIRS['{'])
 
@@ -13,10 +13,10 @@ class Stack():
     def __init__(self, string: str):
         self.stack = []
         self.string = string
-        self.string_splitted = list(self.string)
-        self.pop_counter = 0 # коэф удаление пар скобок
+        # self.string_splitted = list(self.string)
+        # self.pop_counter = 0 # коэф удаление пар скобок
         #print('string_splitted: ', len(self.string_splitted), self.string_splitted)
-        if len(self.stack) % 2 != 0:
+        if len(self.string) % 2 != 0:
             print('Переданные данные НЕ сбалансированы! Дальнейшая проверка проверка прекращается.')
         else:
             print('Проверка четности пройдена успешно, анализируем содержание данных')
@@ -36,12 +36,22 @@ class Stack():
     def pop(self):
         """ The function for deleting last element, returning previous element """
         self.stack.pop(len(self.stack) - 1)
-        self.pop_counter += 1
-        return self.stack[len(self.stack) - 1]
+        #self.pop_counter += 1
+        result = 0
+        try:
+            result = self.stack[len(self.stack) - 1]
+        except:
+            IndexError
+        return result
 
     def peek(self):
         """ The function for getting last stack element """
-        return self.stack[len(self.stack) - 1]
+        result = 0
+        try:
+            result = self.stack[len(self.stack) - 1]
+        except:
+            IndexError
+        return result
 
     def size(self):
         """ The function returning the quantity of elements (stack size) """
@@ -49,18 +59,18 @@ class Stack():
 
     def isBalanced(self):
         """ The function is matching closing character and that the parenthesis pairs are correctly nested. Works with: (), [], {} only """
-        if self.isEmpty():
-            self.push(self.string[0])
-        else:
-            pass
-        for index in range(1, len(self.string)):
-            if CLOSER[self.peek()] == self.string[index]:
-                try:
+        input = iter(self.string)
+        while True:
+            try:
+                element = next(input)
+            except:
+                StopIteration
+            #print('element:', element)
+            if element in CLOSER: #adding element to stack if it is opening
+                self.push(element)
+            else: #if element is closing
+                if CLOSER[self.peek()] == element: #check is it fit for last stack element
                     self.pop()
-                except:
-                    IndexError
-            else:
-                self.push(self.string[index])
 
         if self.isEmpty():
             print(f'Cтрока {self.string} сбалансирована')
@@ -68,6 +78,34 @@ class Stack():
             print(f'Cтрока {self.string} не сбалансирована')
         print('Состав стэка: ', self.stack)
 
+
+
+
+
+
+
+
+
+
+        # ####old_version
+        # if self.isEmpty():
+        #     self.push(self.string[0])
+        # else:
+        #     pass
+        # for index in range(1, len(self.string)):
+        #     if CLOSER[self.peek()] == self.string[index]:
+        #         try:
+        #             self.pop()
+        #         except:
+        #             IndexError
+        #     else:
+        #         self.push(self.string[index])
+        #
+        # if self.isEmpty():
+        #     print(f'Cтрока {self.string} сбалансирована')
+        # else:
+        #     print(f'Cтрока {self.string} не сбалансирована')
+        # print('Состав стэка: ', self.stack)
 
 
         # for index, element in enumerate(self.string_splitted):
