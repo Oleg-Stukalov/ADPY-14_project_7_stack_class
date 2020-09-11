@@ -17,9 +17,9 @@ class Stack():
             isEmpty = False
         return isEmpty
 
-    def push(self):
+    def push(self, element):
         """ The function for adding element to stack """
-        self.stack.append()
+        self.stack.append(element)
 
     def pop(self):
         """ The function for deleting last element, returning previous element """

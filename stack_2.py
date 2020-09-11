@@ -50,7 +50,7 @@ class Stack():
         try:
             result = self.stack[len(self.stack) - 1]
         except:
-            IndexError
+            IndexError, KeyError
         return result
 
     def size(self):
