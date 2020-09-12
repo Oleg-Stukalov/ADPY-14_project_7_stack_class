@@ -28,7 +28,6 @@ class Stack():
         else:
             self.stack.pop()
             result = self.peek()
-            #self.stack.pop(len(self.stack) - 1)
         return result
 
     def peek(self):

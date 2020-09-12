@@ -11,7 +11,8 @@ class Stack():
     def __init__(self, string: str):
         self.stack = []
         self.string = string
-        print('Класс инициализирован со следующими входными данными:', self.string)
+        print('Класс инициализирован со входными данными:', self.string)
+        self.STOP = False #Boolean var for immediate stop if closing element is first coming
         #self.string_splitted = list(self.string)
 
     def isEmpty(self):
@@ -28,12 +29,20 @@ class Stack():
 
     def pop(self):
         """ The function for deleting last element, returning previous element """
-        self.stack.pop(-1)
-        return self.stack[-1]
+        if self.isEmpty():
+            result = 'Stack is empty!'
+        else:
+            self.stack.pop()
+            result = self.peek()
+        return result
 
     def peek(self):
         """ The function for getting last stack element """
-        return self.stack[-1]
+        if self.isEmpty():
+            result = 'Stack is empty!'
+        else:
+            result = self.stack[-1]
+        return result
 
     def size(self):
         """ The function returning the quntity of elements (stack size) """
@@ -41,17 +50,30 @@ class Stack():
 
     def isBalanced(self):
         """ The function is matching closing character and that the parenthesis pairs are correctly nested. Works with: (), [], {} only """
+        if self.string[0] not in CLOSER:
+            print('ВНИМАНИЕ ошибка! - последовательность начинается с закрывающей скобки!')
+            self.STOP = True
+            result = False
         for letter in self.string:
             #print('letter:', letter)
             if letter in CLOSER: #adding element to stack if it is opening
                 self.push(letter)
             else: #if element is closing
+                #print('!!!!!', CLOSER.get(self.peek()))
                 if CLOSER.get(self.peek()) == letter: #check is it fit for last stack element
                     self.pop()
-                else:
-                    print('Последовательность начинается с закрывающей скобки! Обработка прекращается!')
-        if self.isEmpty():
-            print(f'Cтрока {self.string} сбалансирована')
+                # else:
+                #     print('ВНИМАНИЕ ошибка! - последовательность начинается с закрывающей скобки!')
+                #     self.STOP = True
+
+        if not self.STOP:
+            print('Длина и содержание стэка по результатам анализа: ', self.size(), self.stack)
+            result = True
+
+        if not self.STOP and self.isEmpty():
+            print(f'Сбалансировано: {self.string}')
+            result = True
         else:
-            print(f'Cтрока {self.string} не сбалансирована')
-        print('Состав стэка: ', self.stack)
+            print(f'Не сбалансировано: {self.string}')
+
+        return result
