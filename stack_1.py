@@ -23,15 +23,33 @@ class Stack():
 
     def pop(self):
         """ The function for deleting last element, returning previous element """
-        self.stack.pop(len(self.stack) - 1)
-        return self.stack[len(self.stack) - 1]
+        if self.isEmpty():
+            result = 'Stack is empty!'
+        else:
+            self.stack.pop()
+            result = self.peek()
+            #self.stack.pop(len(self.stack) - 1)
+        return result
 
     def peek(self):
         """ The function for getting last stack element """
-        return self.stack[len(self.stack) - 1]
+        if self.isEmpty():
+            result = 'Stack is empty!'
+        else:
+            result = self.stack[-1]
+        return result
 
-    #     size - возвращает количество элементов в стеке.
     def size(self):
         """ The function returning the quntity of elements (stack size) """
         return len(self.stack)
 
+# string = '12345'
+# stack000 = Stack(string)
+# print('Push:', stack000.push(string[0]))
+# print('Push:', stack000.push(string[1]))
+# print('Stack:', stack000.stack)
+# print('Size:', stack000.size())
+# print('isEmpty:', stack000.isEmpty())
+# print('Peek:', stack000.peek())
+# print('Pop:', stack000.pop())
+# print('Stack:', stack000.stack)

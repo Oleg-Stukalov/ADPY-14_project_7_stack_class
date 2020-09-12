@@ -11,8 +11,8 @@ class Stack():
     def __init__(self, string: str):
         self.stack = []
         self.string = string
+        print('Класс инициализирован со следующими входными данными:', self.string)
         #self.string_splitted = list(self.string)
-
 
     def isEmpty(self):
         """ Boolean function that indicates empty status of stack """
@@ -28,35 +28,25 @@ class Stack():
 
     def pop(self):
         """ The function for deleting last element, returning previous element """
-        self.stack.pop(len(self.stack) - 1)
-        result = 0
-        try:
-            result = self.stack[len(self.stack) - 1]
-        except:
-            IndexError
-        return result
+        self.stack.pop(-1)
+        return self.stack[-1]
 
     def peek(self):
         """ The function for getting last stack element """
-        if self.isEmpty():
-            result = None
-        else:
-            result = self.stack[len(self.stack) - 1]
-        return result
+        return self.stack[-1]
 
-    #     size - возвращает количество элементов в стеке.
     def size(self):
         """ The function returning the quntity of elements (stack size) """
         return len(self.stack)
 
     def isBalanced(self):
         """ The function is matching closing character and that the parenthesis pairs are correctly nested. Works with: (), [], {} only """
-        for element in list(self.string):
-            #print('element:', element)
-            if element in CLOSER: #adding element to stack if it is opening
-                self.push(element)
+        for letter in self.string:
+            #print('letter:', letter)
+            if letter in CLOSER: #adding element to stack if it is opening
+                self.push(letter)
             else: #if element is closing
-                if CLOSER[self.peek()] == element: #check is it fit for last stack element
+                if CLOSER.get(self.peek()) == letter: #check is it fit for last stack element
                     self.pop()
                 else:
                     print('Последовательность начинается с закрывающей скобки! Обработка прекращается!')
