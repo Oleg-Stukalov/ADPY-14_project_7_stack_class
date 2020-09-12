@@ -5,3 +5,6 @@ TEST_3 = '{{[()]}}'
 TEST_4 = '}{}'
 TEST_5 = '{{[(])]}}'
 TEST_6 = '[[{())}]'
+
+# additional strings
+TEST_7 = '{{[(]])]}}'

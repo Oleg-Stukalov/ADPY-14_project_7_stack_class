@@ -1,4 +1,3 @@
-from test_data import TEST_1, TEST_2, TEST_3, TEST_4, TEST_5, TEST_6
 
 CLOSER = {'(': ')', '[': ']', '{': '}'}
 
@@ -12,8 +11,7 @@ class Stack():
         self.stack = []
         self.string = string
         print('Класс инициализирован со входными данными:', self.string)
-        self.STOP = False #Boolean var for immediate stop if closing element is first coming
-        #self.string_splitted = list(self.string)
+        self.STOP = False #Boolean var for immediate stop if closing element is first coming or delayed stop if there are ignored elements
 
     def isEmpty(self):
         """ Boolean function that indicates empty status of stack """
@@ -50,25 +48,28 @@ class Stack():
 
     def isBalanced(self):
         """ The function is matching closing character and that the parenthesis pairs are correctly nested. Works with: (), [], {} only """
+        result = False
+
         if self.string[0] not in CLOSER:
-            print('ВНИМАНИЕ ошибка! - последовательность начинается с закрывающей скобки!')
+            print('ОШИБКА-последовательность начинается с закрывающей скобки!')
             self.STOP = True
-            result = False
+
+        if len(self.string) % 2 != 0:
+            print('ОШИБКА-проверка четности не пройдена!')
+            self.STOP = True
+        else:
+            print('Проверка четности пройдена успешно, анализируем содержание данных')
+
         for letter in self.string:
-            #print('letter:', letter)
-            if letter in CLOSER: #adding element to stack if it is opening
+            if not self.STOP and letter in CLOSER: #adding element to stack if it is opening
                 self.push(letter)
             else: #if element is closing
-                #print('!!!!!', CLOSER.get(self.peek()))
+
                 if CLOSER.get(self.peek()) == letter: #check is it fit for last stack element
                     self.pop()
-                # else:
-                #     print('ВНИМАНИЕ ошибка! - последовательность начинается с закрывающей скобки!')
-                #     self.STOP = True
-
-        if not self.STOP:
-            print('Длина и содержание стэка по результатам анализа: ', self.size(), self.stack)
-            result = True
+                else:
+                    self.STOP = True
+                    break
 
         if not self.STOP and self.isEmpty():
             print(f'Сбалансировано: {self.string}')
